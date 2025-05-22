@@ -12,28 +12,27 @@ A simple yet powerful file manager built with PHP, HTML, CSS, and JavaScript fea
 - 📱 Responsive design with Tailwind CSS
 
 ## 📦 Project Structure
-```
+`
 project-root/
-├── index.php                  # Main interface
+├── index.php # Main interface
 ├── public/
-│   ├── app.js                 # Module loader
-│   ├── file_ops.js            # File operations logic
-│   ├── navigation.js          # UI navigation logic
-│   └── styles.css             # Custom styles
+│ ├── app.js # Module loader
+│ ├── file_ops.js # File operations logic
+│ ├── navigation.js # UI navigation logic
+│ └── styles.css # Custom styles
 ├── api/
-│   ├── config.php             # Global config & helpers
-│   ├── upload_chunk.php       # Handles file chunks
-│   ├── assemble.php           # Reassembles chunks
-│   ├── list_files.php         # Directory listing
-│   ├── download.php           # File streaming
-│   ├── delete_file.php        # File deletion
-│   ├── rename_file.php        # Rename operations
-│   └── move_file.php          # Move operations
+│ ├── config.php # Global config & helpers
+│ ├── upload_chunk.php # Handles file chunks
+│ ├── assemble.php # Reassembles chunks
+│ ├── list_files.php # Directory listing
+│ ├── download.php # File streaming
+│ ├── delete_file.php # File deletion
+│ ├── rename_file.php # Rename operations
+│ └── move_file.php # Move operations
 └── uploads/
-    ├── temp/                  # Temporary storage
-    └── files/                 # Final files storage
-```
-
+├── temp/ # Temporary storage
+└── files/ # Final files storage
+`
 ## 🛠️ Installation
 1. Clone the repository:
 ```bash
