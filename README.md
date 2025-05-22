@@ -1,4 +1,3 @@
-```markdown
 # 📁 PHP File Manager with Chunked Uploads
 
 A simple yet powerful file manager built with PHP, HTML, CSS, and JavaScript featuring chunked uploads, file operations, and responsive UI.
@@ -36,7 +35,7 @@ project-root/
 ## 🛠️ Installation
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/file-manager.git
+git clone https://github.com/pgwiz/PhPfileManager.git
 ```
 
 2. Install dependencies:
