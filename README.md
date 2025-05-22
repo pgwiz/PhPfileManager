@@ -11,6 +11,7 @@ A simple yet powerful file manager built with PHP, HTML, CSS, and JavaScript fea
 - 📱 Responsive design with Tailwind CSS
 
 ## 📦 Project Structure
+```
 `
 project-root/
 ├── index.php # Main interface
@@ -32,6 +33,8 @@ project-root/
 ├── temp/ # Temporary storage
 └── files/ # Final files storage
 `
+```
+
 ## 🛠️ Installation
 1. Clone the repository:
 ```bash
