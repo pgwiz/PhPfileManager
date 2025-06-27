@@ -1,5 +1,6 @@
 .old/
 .env
+config.php
 ptg
 ptg.sh
 ptg.ps1
