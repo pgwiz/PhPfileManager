@@ -16,7 +16,7 @@ A modern, feature-rich file manager built with PHP and vanilla JavaScript. It fe
 
 ## 📦 Project Structure
 The project has been streamlined to use a single, consolidated API endpoint for most operations.
-
+```
 project-root/
 ├── main_index.php      # The main user interface file
 ├── api/
@@ -32,7 +32,7 @@ project-root/
 └── uploads/
 ├── temp/               # Temporary storage for file chunks
 └── files/              # Final destination for all uploaded files
-
+```
 
 ## 🛠️ Installation
 1.  **Clone the repository:**
