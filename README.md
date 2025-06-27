@@ -1,147 +1,105 @@
-# 📁 PHP File Manager with Chunked Uploads
+# 📁 Advanced PHP File Manager
 
-A simple yet powerful file manager built with PHP, HTML, CSS, and JavaScript featuring chunked uploads, file operations, and responsive UI.
+A modern, feature-rich file manager built with PHP and vanilla JavaScript. It features a responsive UI, chunked uploads for large files, a text editor, multiple view modes, and a complete suite of file management tools.
 
 ## 🔧 Features
-- ✅ 9MB chunked file uploads with resumable support
-- 🗂 Folder navigation and management
-- 📤 Download/Delete/Rename/Move operations
-- 🖱 Drag & Drop upload support
-- 🔍 File search and filtering
-- 📱 Responsive design with Tailwind CSS
+- ✅ **Chunked Uploads**: Reliably upload large files with a 9MB chunking mechanism.
+- 📂 **Full File & Folder Management**: Create, delete, rename, and move both files and folders.
+- ✏️ **Built-in Text Editor**: Edit text-based files (`.txt`, `.html`, `.css`, `.js`, `.php`, etc.) directly in the browser.
+- 🖱️ **Modern UI & UX**:
+    - Drag & Drop file uploads.
+    - Right-click context menu for quick actions.
+    - Three persistent view modes: List, Grid, and Compact.
+- 📱 **Responsive Design**: A clean, modern interface that works seamlessly on desktop, tablet, and mobile devices.
+- 🔒 **Secure**: Built with security in mind, featuring robust path sanitization to prevent directory traversal attacks.
+- ⚙️ **Customizable**: Uses vanilla CSS for theming, making it easy to adapt to your own style.
 
 ## 📦 Project Structure
-```
-`
+The project has been streamlined to use a single, consolidated API endpoint for most operations.
+
 project-root/
-├── index.php # Main interface
-├── public/
-│ ├── app.js # Module loader
-│ ├── file_ops.js # File operations logic
-│ ├── navigation.js # UI navigation logic
-│ └── styles.css # Custom styles
+├── main_index.php      # The main user interface file
 ├── api/
-│ ├── config.php # Global config & helpers
-│ ├── upload_chunk.php # Handles file chunks
-│ ├── assemble.php # Reassembles chunks
-│ ├── list_files.php # Directory listing
-│ ├── download.php # File streaming
-│ ├── delete_file.php # File deletion
-│ ├── rename_file.php # Rename operations
-│ └── move_file.php # Move operations
+│   ├── config.php          # Global configuration & database settings
+│   ├── phpfile_operations.php # CONSOLIDATED API for all actions (list, delete, rename, etc.)
+│   ├── upload_chunk.php    # Handles individual file chunks during upload
+│   └── assemble.php        # Reassembles chunks into the final file
+├── public/
+│   ├── app.js              # Main application logic and event listeners
+│   ├── file_ops.js         # Core frontend logic (API calls, rendering, modals)
+│   ├── theme.css           # The main theme and styles
+│   └── responsive.css      # CSS for mobile and tablet responsiveness
 └── uploads/
-├── temp/ # Temporary storage
-└── files/ # Final files storage
-`
-```
+├── temp/               # Temporary storage for file chunks
+└── files/              # Final destination for all uploaded files
+
 
 ## 🛠️ Installation
-1. Clone the repository:
-```bash
-git clone https://github.com/pgwiz/PhPfileManager.git
-```
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/pgwiz/PhPfileManager.git](https://github.com/pgwiz/PhPfileManager.git)
+    ```
 
-2. Install dependencies:
-```bash
-# No npm packages needed - just pure PHP + Tailwind
-```
+2.  **Configure your web server:**
+    - Point your web server (Apache, Nginx, etc.) to the root directory of the project.
+    - Ensure the PHP engine is enabled.
 
-3. Configure database in `api/config.php`:
-```php
-define('DB_HOST', '127.0.0.1');
-define('DB_NAME', 'pov');
-define('DB_USER', 'root');
-define('DB_PASS', 'root');
-```
+3.  **Set Permissions:**
+    - The web server must have write permissions for the `uploads/files/` and `uploads/temp/` directories.
+    ```bash
+    # On a Linux server, you can often do this with:
+    sudo chown -R www-data:www-data uploads
+    sudo chmod -R 755 uploads
+    ```
 
-4. Start PHP server:
-```bash
-cd project-root
-php -S localhost:8000 -t .
-```
+4.  **Start a development server (optional):**
+    ```bash
+    # Navigate to the project's root directory
+    php -S localhost:8000
+    ```
 
-## 🚀 Usage
-### Development Server
-```bash
-php -S localhost:8000 -t .
-```
+## 🚀 API Endpoints
+The backend now uses a single powerful endpoint for most operations, controlled by an `action` parameter.
 
-### Production Setup
-1. Upload files to PHP-enabled server
-2. Ensure `uploads/files` and `uploads/temp` are writable
-3. Configure `.htaccess` for Apache or Nginx rules
+| Endpoint | Method | Action Parameter | Description |
+| :--- | :--- | :--- | :--- |
+| `/api/phpfile_operations.php` | GET | `list_files` | Lists contents of a directory. |
+| `/api/phpfile_operations.php` | POST | `create_item` | Creates a new file or folder. |
+| `/api/phpfile_operations.php` | POST | `delete` | Deletes a file or folder. |
+| `/api/phpfile_operations.php` | POST | `rename` | Renames a file or folder. |
+| `/api/phpfile_operations.php` | POST | `move` | Moves a file or folder. |
+| `/api/phpfile_operations.php` | GET | `get_content` | Retrieves text content for the editor. |
+| `/api/phpfile_operations.php` | POST | `save_content`| Saves text content from the editor. |
+| `/api/phpfile_operations.php` | GET | `download` | Streams a file for download. |
+| `/api/upload_chunk.php` | POST | *(N/A)* | Handles an individual file chunk. |
+| `/api/assemble.php` | POST | *(N/A)* | Assembles chunks into the final file. |
 
-## 🧪 API Endpoints
-| Endpoint          | Method | Description                  |
-|------------------|--------|------------------------------|
-| `/api/upload_chunk.php` | POST   | Upload file chunks           |
-| `/api/assemble.php`     | POST   | Reassemble chunks            |
-| `/api/list_files.php`   | GET    | List directory contents      |
-| `/api/delete_file.php`  | POST   | Delete files                 |
-| `/api/rename_file.php`  | POST   | Rename files                 |
-| `/api/move_file.php`    | POST   | Move files                   |
-| `/api/download.php`     | GET    | Stream files for download    |
-
-## 📝 File Operations
-### Chunked Upload
-```javascript
-// Uses 9MB chunks
-const CHUNK_SIZE = 9 * 1024 * 1024;
-```
-
-### File Management
-- Delete: Soft confirmation with `confirm()`
-- Rename: Modal UI with validation
-- Move: Folder selection with path traversal protection
-
-## 🎨 UI Components
-- Tailwind CSS v3.4.17 CDN
-- Responsive table layout
-- Modal dialogs for operations
-- File type indicators
-- Size formatting (KB/MB)
 
 ## 🔐 Security Considerations
-- Filename sanitization with `sanitizeFilename()`
-- Path traversal protection via `basename()`
-- File existence checks before operations
-- Form validation on both client and server
-- Session-based chunk storage
+- **Path Traversal Protection**: A robust `sanitizePath()` function on the backend ensures that user-provided paths are decoded and validated, preventing any access outside the designated `uploads/files` directory.
+- **Filename Sanitization**: New filenames for creating or renaming items are sanitized to prevent illegal characters or path manipulation.
+- **Request Validation**: The backend checks for the correct HTTP method (e.g., `POST` for destructive actions) for all operations.
 
 ## 📈 Roadmap
-- [ ] Add folder creation
-- [ ] Implement upload progress bars
-- [ ] Add file search/filter
-- [ ] Implement user authentication
-- [ ] Add dark mode toggle
-- [ ] Support parallel chunk uploads
+- [x] ~~Add folder creation~~
+- [x] ~~Implement upload progress bars~~
+- [x] ~~Text Editor for files~~
+- [x] ~~Right-click context menu~~
+- [ ] Implement user authentication and permissions.
+- [ ] Add file search/filter functionality within the current directory.
+- [ ] Add dark mode toggle and more themes.
+- [ ] Implement parallel chunk uploads for faster performance.
+- [ ] Add support for file previews (e.g., image thumbnails).
 
 ## 🤝 Contributing
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/new-feature`)
-3. Commit changes (`git commit -am 'Add feature'`)
-4. Push to branch (`git push origin feature/new-feature`)
-5. Open pull request
+1.  Fork the project.
+2.  Create your feature branch (`git checkout -b feature/NewAmazingFeature`).
+3.  Commit your changes (`git commit -m 'Add some NewAmazingFeature'`).
+4.  Push to the branch (`git push origin feature/NewAmazingFeature`).
+5.  Open a Pull Request.
 
 ## 📄 License
-MIT License - see LICENSE.md
+This project is licensed under the MIT License - see the `LICENSE.md` file for details.
 
 ## 📬 Contact
-Your Name - [@yourhandle](https://twitter.com/yourhandle) - email@example.com
-```
-
-This documentation includes:
-- Project overview and features
-- Clear file structure diagram
-- Installation instructions
-- API endpoint reference
-- Security considerations
-- Roadmap and contribution guidelines
-- License and contact information
-
-You can enhance this further by:
-1. Adding screenshots of the UI
-2. Including example requests/responses
-3. Adding deployment instructions for popular hosts
-4. Creating a changelog
-5. Adding badges for build status/license
+Your Name - [@pgwiz](https://twitter.com/pgwiz) - support@pgwiz.uk

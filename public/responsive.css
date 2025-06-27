@@ -1,0 +1,114 @@
+/* public/responsive.css */
+
+/* --- Tablet and Small Desktop Screens --- */
+@media (max-width: 992px) {
+    .container {
+        margin: 10px;
+        padding: 0;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .controls-toolbar {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+
+    .path-display {
+        text-align: center;
+        order: -1; /* Move path to the top */
+    }
+}
+
+/* --- Mobile Devices (Landscape) --- */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.8em;
+    }
+    .header p {
+        font-size: 1em;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    /* Hide text on main control buttons */
+    .control-btn span {
+        display: none;
+    }
+    .control-btn {
+        justify-content: center;
+    }
+
+    .navigation-controls {
+        justify-content: center;
+    }
+    
+    .view-controls {
+        justify-content: center;
+    }
+
+    /* Adjust grid view for smaller screens */
+    .view-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+    }
+
+    /* In list view, hide the "Modified" column */
+    .view-list th:nth-child(3),
+    .view-list td:nth-child(3) {
+        display: none;
+    }
+    
+    .actions-container {
+        grid-template-columns: 1fr; /* Stack action buttons */
+    }
+}
+
+/* --- Small Mobile Devices (Portrait) --- */
+@media (max-width: 576px) {
+    .theme-modern {
+        padding: 0;
+    }
+    .container {
+        margin: 0;
+        border-radius: 0;
+    }
+    .header {
+        padding: 20px;
+    }
+    
+    .main-content {
+        padding: 10px;
+    }
+
+    .controls-toolbar {
+        padding: 10px;
+    }
+
+    /* In list view, make text smaller */
+    .view-list th, .view-list td {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+    .actions-container {
+        display: flex; /* Go back to flex for smaller buttons */
+        flex-wrap: wrap;
+    }
+    .action-btn {
+        flex-grow: 1;
+    }
+
+    /* Make modals take up more screen space */
+    .modal-content {
+        max-width: 90vw;
+        padding: 20px;
+    }
+    #editor-textarea {
+        font-size: 12px;
+    }
+}
