@@ -1,4 +1,5 @@
 .old/
+.env
 ptg
 ptg.sh
 ptg.ps1
